@@ -25,11 +25,13 @@ export default class Chat extends Component {
                             <div className="simplebar-content-wrapper" style={{ height: '100%', overflow: 'hidden scroll' }}>
                                 <div className="simplebar-content" style={{ padding: '20px 36px' }}>
                                     {this.props.Contents.map((Content, i) => {
+                                        console.log(Content.PathImage)
                                         if (Content.Content !== "") {
                                             let is_me = true;
                                             if (this.props.Me.MyName !== Content.UserName && Content.UserName !== "") {
                                                 is_me = false;
                                             }
+
 
                                             return (<div key={i} className={`chat ${is_me ? 'is-me' : 'is-you'}`}>
                                                 {!is_me &&
@@ -43,7 +45,13 @@ export default class Chat extends Component {
                                                 <div className="chat-content">
                                                     <div className="chat-bubbles">
                                                         <div className="chat-bubble">
-                                                            <div className="chat-msg">{Content.Content}</div>
+                                                            <div className="chat-msg">
+                                                                {Content.Content !== "" ? <>{Content.Content}</> : <></>}
+                                                                {Content.PathImage !== undefined &&
+                                                                    <img src={`http://localhost:4000/${Content.PathImage}`} />
+                                                                }
+
+                                                            </div>
                                                             <ul className="chat-msg-more">
                                                                 <li className="d-none d-sm-block">
                                                                     <a href="#" className="btn btn-icon btn-sm btn-trigger"><em className="icon ni ni-reply-fill" /></a>

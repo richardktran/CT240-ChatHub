@@ -17,6 +17,10 @@ export default class Input extends Component {
         }
     }
 
+    handleSendMessage = () => {
+        this.SubmitMessage();
+    }
+
     toggleShowOption = () => {
         this.setState({
             ...this.state,
@@ -55,6 +59,8 @@ export default class Input extends Component {
             file: ''
         });
     }
+
+
 
     changeFile = (event) => {
         try {
@@ -113,7 +119,18 @@ export default class Input extends Component {
                 </div>
                 <div className="nk-chat-editor-form">
                     <div className="form-control-wrap">
-                        <textarea className="form-control form-control-simple no-resize" rows={1} id="default-textarea" placeholder="Type your message..." defaultValue={""} />
+                        {/* <textarea className="form-control form-control-simple no-resize" rows={1} id="default-textarea" placeholder="Type your message..." defaultValue={""} /> */}
+                        <input className="form-control form-control-simple no-resize"
+                            autocomplete="off"
+                            type="text"
+                            name="ContentChat"
+                            value={this.state.ContentData}
+                            onChange={this.HandleContent}
+                            onKeyDown={this.handleKeyDown}
+                            placeholder="Nhập tin nhắn"
+                            style={{ paddingTop: 0 }}
+                        >
+                        </input>
                     </div>
                 </div>
                 <ul className="nk-chat-editor-tools g-2">
@@ -121,7 +138,9 @@ export default class Input extends Component {
                         <a href="#" className="btn btn-sm btn-icon btn-trigger text-primary"><em className="icon ni ni-happyf-fill" /></a>
                     </li>
                     <li>
-                        <button className="btn btn-round btn-primary btn-icon"><em className="icon ni ni-send-alt" /></button>
+                        <button className="btn btn-round btn-primary btn-icon" onClick={this.handleSendMessage}>
+                            <em className="icon ni ni-send-alt" />
+                        </button>
                     </li>
                 </ul>
             </div>
