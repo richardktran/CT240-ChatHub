@@ -1,0 +1,168 @@
+/* input chat */
+/*responsive bottom*/
+.ip {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+.ip .r-col-1 {
+  width: 430px;
+  margin: 0;
+}
+
+.ip .r-col-2 {
+  margin-left: 10px;
+  width: 50%;
+}
+
+.ip .r-col-3 {
+  margin-left: 10px;
+  width: 400px;
+}
+/*responsive bottom*/
+
+.ip .r-col-2 .input-chat {
+    width: 100%;
+    height: 60px;
+    margin: 0 auto;
+    background-color: #fff;
+  }
+
+  .ip .r-col-2 .input-chat .row .col-1-file {
+    width: 40px;
+  }
+  
+  .ip .r-col-2 .input-chat .col-1-file label {
+      width: 40px;
+      height: 40px;
+      border-radius: 40px;
+      transition: 0.5s;
+      position: relative;
+      top: 10px;
+      cursor: pointer;
+  }
+  
+  .ip .r-col-2 .input-chat .col-1-file label svg {
+      position: relative;
+      right: 0px;
+      bottom: 0px;
+  }
+  
+  .ip .r-col-2 .input-chat .col-1-file label:hover{
+      background: #BBBBBB;
+  }
+  
+  .ip .r-col-2 .input-chat .col-1-file input{
+      display: none;
+  }
+  
+  .ip .r-col-2 .input-chat .message-chat {
+    width: 100%;
+    height: 40px;
+    border-radius: 15px;
+    position: absolute;
+    top: 10px;
+    border: 0;
+    background: #ccc;
+    padding: 0 20px 0 20px;
+  }
+
+  .ip .r-col-2 .input-chat .message-chat:focus {
+    outline: 0;
+  }
+  
+  .ip .r-col-2 .input-chat .submit-message {
+    background: none;
+    border: 0;
+    position: absolute;
+    top: 12px;
+    margin-left: 0px;
+  }
+/*--responsive--*/
+
+@media(max-width: 1680px){
+
+}
+@media(max-width: 1600px){
+
+}
+@media(max-width: 1440px){
+
+}
+@media(max-width: 1366px){
+  .ip .r-col-2 {
+    width: 1000px;
+  }
+  .ip .r-col-3 {
+      display: none;
+  }
+}
+@media(max-width: 1280px){
+
+}
+@media(max-width: 1080px){
+/* chat app container col 1 */
+  .ip .r-col-1{
+  width: 100px;
+  margin: 0;
+  }
+}
+@media(max-width: 1050px){
+
+}
+@media(max-width: 1024px){
+	
+}
+@media(max-width: 991px){
+
+}
+@media(max-width: 900px){
+	
+}
+@media(max-width: 800px){
+	
+}
+@media(max-width: 768px){
+	
+}
+@media(max-width: 736px){
+	
+}
+@media(max-width: 667px){
+	
+}
+@media(max-width: 640px){
+  .ip .r-col-2 .input-chat {
+    width: 90%;
+    height: 60px;
+    margin: 0 auto;
+    background-color: #fff;
+  }
+}
+@media(max-width: 600px){
+
+}
+@media(max-width: 568px){
+	
+}
+@media(max-width: 480px){
+	
+}
+@media(max-width: 440px){
+	
+}
+@media(max-width: 414px){
+	
+}
+@media(max-width: 384px){
+	
+}
+@media(max-width: 375px){
+
+}
+@media(max-width: 320px){
+	
+}
+/*--responsive--*/
