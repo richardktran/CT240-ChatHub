@@ -1,20 +1,24 @@
-import { Component } from "react";
-import MyChat from "./MyChat";
-import UserChat from "./UserChat";
-// import "./CSS/Chat.scss";
+import React, { Component } from "react";
 
-export default class Chat extends Component {
-    // scrollToBottom = () => {
-    //     this.messagesEnd.scrollIntoView({ behavior: "auto" });
-    // }
+export default class Chat extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-    // componentDidMount() {
-    //     this.scrollToBottom();
-    // }
+    scrollToBottom = () => {
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
 
-    // componentDidUpdate() {
-    //     this.scrollToBottom();
-    // }
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+
+
+
     render() {
         return (
             <div className="nk-chat-panel" data-simplebar="init">
@@ -25,22 +29,57 @@ export default class Chat extends Component {
                             <div className="simplebar-content-wrapper" style={{ height: '100%', overflow: 'hidden scroll' }}>
                                 <div className="simplebar-content" style={{ padding: '20px 36px' }}>
                                     {this.props.Contents.map((Content, i) => {
-                                        console.log(Content.PathImage)
+                                        let time = Date.parse(Content.Time);
+                                        let date = new Date(time);
+                                        date = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+
+                                        var dayString = ("0" + date.getUTCDate()).slice(-2) + "/" +
+                                            ("0" + (date.getUTCMonth() + 1)).slice(-2) + "/" +
+                                            date.getUTCFullYear() + " ";
+                                        var timeString = ("0" + date.getUTCHours()).slice(-2) + ":" +
+                                            ("0" + date.getUTCMinutes()).slice(-2);
+
+                                        var current = new Date();
+                                        current = new Date(current.getTime() - current.getTimezoneOffset() * 60000)
+                                        if (
+                                            date.getDate() === current.getDate() &&
+                                            date.getMonth() === current.getMonth() &&
+                                            date.getYear() === current.getYear()
+                                        ) {
+                                            dayString = "";
+                                        }
+
+                                        var dateString = dayString + timeString;
+
                                         if (Content.Content !== "") {
                                             let is_me = true;
                                             if (this.props.Me.MyName !== Content.UserName && Content.UserName !== "") {
                                                 is_me = false;
                                             }
 
+                                            let PathAvatar = "";
+                                            this.props.user.forEach((UserInfor) => {
+                                                if (UserInfor.UserName === Content.UserName) {
+                                                    PathAvatar = UserInfor.PathAvatar;
+                                                }
+                                            });
+
+                                            let no_avt = <div className="chat-avatar">
+                                                <div className="user-avatar bg-purple">
+                                                    <span>IT</span>
+                                                </div>
+                                            </div>
+
+                                            let avt = <div className="chat-avatar">
+                                                <div className="chat-media user-avatar">
+                                                    <img src={PathAvatar} alt="" />
+                                                    <span className="status dot dot-lg dot-success" />
+                                                </div>
+                                            </div>
+
 
                                             return (<div key={i} className={`chat ${is_me ? 'is-me' : 'is-you'}`}>
-                                                {!is_me &&
-                                                    <div className="chat-avatar">
-                                                        <div className="user-avatar bg-purple">
-                                                            <span>IT</span>
-                                                        </div>
-                                                    </div>
-                                                }
+                                                {!is_me && avt}
 
                                                 <div className="chat-content">
                                                     <div className="chat-bubbles">
@@ -82,12 +121,15 @@ export default class Chat extends Component {
                                                             <li>{Content.UserName}</li>
                                                         }
 
-                                                        <li>29 Apr, 2020 4:28 PM</li>
+                                                        <li>{dateString}</li>
                                                     </ul>
                                                 </div>
                                             </div>)
                                         }
                                     })}
+                                    <div style={{ float: "left", clear: "both" }}
+                                        ref={(el) => { this.messagesEnd = el; }}>
+                                    </div>
                                 </div>
                             </div>
                         </div>
