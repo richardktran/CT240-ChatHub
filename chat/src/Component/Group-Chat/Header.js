@@ -1,6 +1,4 @@
 import { Component } from "react";
-import Manage from "./Manage";
-import "./CSS/Header.scss";
 let check = true;
 export default class Header extends Component {
     constructor(props) {
@@ -35,11 +33,12 @@ export default class Header extends Component {
     }
 
     HandleContent = (event) => {
-        const OldValueSearch = this.state.valueSearch;
-        if (!(event.target.value === "" ||
-            (event.target.value - OldValueSearch) === " ")) {
-            this.props.HandleInputSearch(event.target.value.trim());
-        }
+        // const OldValueSearch = this.state.valueSearch;
+        // if (!(event.target.value === "" ||
+        //     (event.target.value - OldValueSearch) === " ")) {
+        //     this.props.HandleInputSearch(event.target.value.trim());
+        // }
+        this.props.HandleInputSearch(event.target.value.trim());
         this.setState({ valueSearch: event.target.value });
     }
 

@@ -18,6 +18,7 @@ export default class Search extends Component {
                                                 return <ChatUser UserName={User.UserName}
                                                     PathAvatar={User.PathAvatar}
                                                     ID=""
+                                                    AddFriend={true}
                                                     ClickChatUser={this.props.ClickCreateRoom}
                                                 />
                                             })}

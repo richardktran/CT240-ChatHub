@@ -1,5 +1,4 @@
 import { Component } from "react";
-import "./CSS/Input.scss";
 
 export default class Input extends Component {
     constructor(props) {

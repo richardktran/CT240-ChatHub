@@ -265,7 +265,7 @@ module.exports = (Socket) => {
     Socket.on("Client-send-delete-chat", IdData => {
         const ID = IdData.slice(1);
         //Delete media in chat
-        ChatImage.find( {ID: ID} , (error, Data) => {
+        ChatImage.find({ ID: ID }, (error, Data) => {
             Data.forEach(element => {
                 if (element) {
                     const path_image = element.PathImage;
@@ -273,7 +273,7 @@ module.exports = (Socket) => {
                     console.log(path.resolve(__dirname, '../public' + path_image));
                     fs.unlink(path.resolve(__dirname, '../public' + path_image), (err) => {
                         if (!err) {
-                            ChatImage.findByIdAndRemove( IDChat, (error) => {});
+                            ChatImage.findByIdAndRemove(IDChat, (error) => { });
                         }
                     })
                 }
@@ -381,12 +381,12 @@ module.exports = (Socket) => {
             UserName: Data.UserName
         }, (error) => { });
     });
-   Socket.on('disconnect', () => {
-       const UserName = Socket.id;
-       StatusOnline.findOneAndRemove({
-           UserName: UserName
-       }, (error) => {
-           Socket.broadcast.emit("Server-send-not-online", UserName);
-       });
-   })
+    Socket.on('disconnect', () => {
+        const UserName = Socket.id;
+        StatusOnline.findOneAndRemove({
+            UserName: UserName
+        }, (error) => {
+            Socket.broadcast.emit("Server-send-not-online", UserName);
+        });
+    })
 }

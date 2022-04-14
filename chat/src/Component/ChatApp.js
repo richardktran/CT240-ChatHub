@@ -186,6 +186,12 @@ export default class ChatApp extends Component {
 
     //handle input search
     HandleInputSearch = (InputSearch) => {
+        if (InputSearch === "") {
+            this.setState({
+                Result: []
+            });
+            return;
+        }
         //array list user
         let ArrayUser = this.state.user;
         //array list result search
@@ -211,10 +217,13 @@ export default class ChatApp extends Component {
             }
             count = 0;
         });
+
         //set result to state
         this.setState({
             Result: result
         });
+
+
     }
 
     //click create room
@@ -624,9 +633,6 @@ export default class ChatApp extends Component {
                         HandleMessageFile={this.HandleMessageFile}
                     />
 
-                    {/* .nk-chat-panel */}
-
-                    {/* .nk-chat-editor */}
                     <div className="nk-chat-profile" data-simplebar="init">
                         <div className="simplebar-wrapper" style={{ margin: '0px' }}>
                             <div className="simplebar-height-auto-observer-wrapper"><div className="simplebar-height-auto-observer" /></div>
@@ -749,8 +755,6 @@ export default class ChatApp extends Component {
                         <div className="simplebar-track simplebar-horizontal" style={{ visibility: 'hidden' }}><div className="simplebar-scrollbar" style={{ width: '0px', display: 'none' }} /></div>
                         <div className="simplebar-track simplebar-vertical" style={{ visibility: 'visible' }}><div className="simplebar-scrollbar" style={{ height: '402px', transform: 'translate3d(0px, 0px, 0px)', display: 'block' }} /></div>
                     </div>
-                    {/* <div class="nk-chat-profile-overlay"></div> */}
-                    {/* .nk-chat-profile */}
                 </div>
 
             </div>

@@ -75,7 +75,7 @@ export default class User extends Component {
 
     render() {
         return (
-            <li key={this.props.ID} className="chat-item" onClick={this.ClickChatUser}>
+            <li key={this.props.ID} className="chat-item" onClick={this.props.AddFriend ? null : this.ClickChatUser}>
                 <a className="chat-link chat-open" href="#">
                     <div className="chat-media user-avatar">
                         <img src={this.props.PathAvatar} alt="" />
@@ -88,7 +88,12 @@ export default class User extends Component {
                         </div>
                         <div className="chat-context">
                             <div className="text">
-                                <p>Hi Frank! How is you doing?</p>
+                                {this.props.AddFriend ?
+                                    <button className="btn btn-primary" onClick={this.ClickChatUser}>Add Friend</button>
+                                    :
+                                    <p>Hi Frank! How is you doing?</p>
+                                }
+
                             </div>
                         </div>
                     </div>

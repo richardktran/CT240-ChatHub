@@ -1,6 +1,5 @@
 import { Component } from "react";
 import socket from "../Socket.IO/Socket.js";
-// import "./CSS/Header.scss";
 
 export default class Header extends Component {
     constructor(props) {

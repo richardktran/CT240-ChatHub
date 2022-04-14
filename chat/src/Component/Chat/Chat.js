@@ -29,10 +29,14 @@ export default class Chat extends React.Component {
                             <div className="simplebar-content-wrapper" style={{ height: '100%', overflow: 'hidden scroll' }}>
                                 <div className="simplebar-content" style={{ padding: '20px 36px' }}>
                                     {this.props.Contents.map((Content, i) => {
-                                        let time = Date.parse(Content.Time);
+                                        let time = Content.Time
+                                        if (typeof (Content.Time) !== 'number') {
+
+                                            time = Date.parse(Content.Time);
+                                        }
+                                        console.log(time);
                                         let date = new Date(time);
                                         date = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-
                                         var dayString = ("0" + date.getUTCDate()).slice(-2) + "/" +
                                             ("0" + (date.getUTCMonth() + 1)).slice(-2) + "/" +
                                             date.getUTCFullYear() + " ";
@@ -50,6 +54,7 @@ export default class Chat extends React.Component {
                                         }
 
                                         var dateString = dayString + timeString;
+
 
                                         if (Content.Content !== "") {
                                             let is_me = true;
