@@ -79,12 +79,56 @@ export default class ListGroupChat extends Component {
                                         <h6 className="title overline-title-alt">Messages</h6>
                                         <ul className="chat-list">
                                             {this.state.ListUserChat.map((User, i) => {
+                                                // console.log(User)
+                                                // console.log(this.props.ListChatContent)
+                                                var latesContent = "";
+                                                var dateString = ""
+                                                this.props.ListChatContent.map((content) => {
+                                                    if (content.ID === User.ID) {
+                                                        var time = "";
+                                                        if (content.Chat.length !== 0) {
+                                                            latesContent = content.Chat[content.Chat.length - 1].Content ?? ""
+                                                            time = content.Chat[content.Chat.length - 1].Time ?? ""
+                                                            if (typeof (time) !== 'number' && time !== "") {
+
+                                                                time = Date.parse(content.Chat[content.Chat.length - 1].Time);
+                                                            }
+                                                        }
+
+
+                                                        // console.log(time);
+                                                        let date = new Date(time);
+                                                        date = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+                                                        var dayString = ("0" + date.getUTCDate()).slice(-2) + "/" +
+                                                            ("0" + (date.getUTCMonth() + 1)).slice(-2) + "/" +
+                                                            date.getUTCFullYear() + " ";
+                                                        var timeString = ("0" + date.getUTCHours()).slice(-2) + ":" +
+                                                            ("0" + date.getUTCMinutes()).slice(-2);
+
+                                                        var current = new Date();
+                                                        current = new Date(current.getTime() - current.getTimezoneOffset() * 60000)
+                                                        if (
+                                                            date.getDate() === current.getDate() &&
+                                                            date.getMonth() === current.getMonth() &&
+                                                            date.getYear() === current.getYear()
+                                                        ) {
+                                                            dayString = "";
+                                                        }
+
+                                                        dateString = dayString + timeString;
+                                                    }
+                                                })
+                                                if (latesContent === undefined) {
+                                                    latesContent = "[Image]"
+                                                }
                                                 return <ChatUser UserName={User.UserName}
                                                     PathAvatar={User.PathAvatar}
                                                     ID={User.ID}
                                                     IdData={this.props.ID}
                                                     ClickChatUser={this.props.ClickChatUser}
                                                     StatusSeen={this.props.StatusSeen}
+                                                    LatestMessage={latesContent}
+                                                    LatestTime={dateString}
                                                 />
                                             })}
 

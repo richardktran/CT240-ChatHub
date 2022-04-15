@@ -58,7 +58,7 @@ export default class Header extends Component {
                             </div>
                             <div className="user-info">
                                 <div className="lead-text">{this.props.UserChat.UserName}</div>
-                                <div className="sub-text"><span className="d-none d-sm-inline mr-1">Active </span> 35m ago</div>
+                                <div className="sub-text"><span className="d-none d-sm-inline mr-1">Online </span></div>
                                 {/* {this.state.statusOnline} */}
                             </div>
                         </div>

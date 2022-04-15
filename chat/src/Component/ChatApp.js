@@ -140,6 +140,7 @@ export default class ChatApp extends Component {
                     break;
                 }
             }
+            console.log(StateListChatContent);
             //set state
             this.setState({
                 ListChat: ListChat,
@@ -147,6 +148,7 @@ export default class ChatApp extends Component {
             });
             //send message to server
         }
+
         socket.emit('Client-send-data', ChatData);
     }
 
@@ -378,7 +380,6 @@ export default class ChatApp extends Component {
     componentWillUpdate(prevProps, prevState, snapshot) {
         if (this.state.ListChatContent !== prevState.ListChatContent) {
             socket.on('Server-send-data', Data => {
-                console.log(Data)
                 if (Data.PathImage) {
                     const ServerChatData = {
                         UserName: Data.UserName,
@@ -619,6 +620,7 @@ export default class ChatApp extends Component {
                         ClickChatUser={this.ClickChatUser}
                         ID={this.state.IdData}
                         ListChat={this.state.ListChat}
+                        ListChatContent={this.state.ListChatContent}
                     />
 
                 </div>

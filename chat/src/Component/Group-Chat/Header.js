@@ -90,7 +90,7 @@ export default class Header extends Component {
                                     </li>
                                     <li className="divider" />
                                     <li>
-                                        <a href="#"><span>Help</span></a>
+                                        <a href="http://localhost:3000/"><span>Log out</span></a>
                                     </li>
                                 </ul>
                             </div>

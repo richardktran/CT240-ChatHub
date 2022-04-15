@@ -84,14 +84,14 @@ export default class User extends Component {
                     <div className="chat-info">
                         <div className="chat-from">
                             <div className="name {this.state.StatusSeen}">{this.props.UserName}</div>
-                            <span className="time">3 Apr</span>
+                            <span className="time">{this.props.LatestTime}</span>
                         </div>
                         <div className="chat-context">
                             <div className="text">
                                 {this.props.AddFriend ?
                                     <button className="btn btn-primary" onClick={this.ClickChatUser}>Add Friend</button>
                                     :
-                                    <p>Hi Frank! How is you doing?</p>
+                                    <p>{this.props.LatestMessage}</p>
                                 }
 
                             </div>
