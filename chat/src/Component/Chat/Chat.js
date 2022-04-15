@@ -34,7 +34,7 @@ export default class Chat extends React.Component {
 
                                             time = Date.parse(Content.Time);
                                         }
-                                        console.log(time);
+                                        // console.log(time);
                                         let date = new Date(time);
                                         date = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
                                         var dayString = ("0" + date.getUTCDate()).slice(-2) + "/" +

@@ -252,6 +252,10 @@ export default class ChatApp extends Component {
         if (found) {
             socket.emit("Client-add-friend", Data);
         }
+
+        this.ClickChatUser(ValueUserName);
+        window.location.reload(false);
+
     }
     //click create room for list user group
     ClickCreateRoomInGroup = (ValueUserName) => {
@@ -374,6 +378,7 @@ export default class ChatApp extends Component {
     componentWillUpdate(prevProps, prevState, snapshot) {
         if (this.state.ListChatContent !== prevState.ListChatContent) {
             socket.on('Server-send-data', Data => {
+                console.log(Data)
                 if (Data.PathImage) {
                     const ServerChatData = {
                         UserName: Data.UserName,
@@ -404,7 +409,6 @@ export default class ChatApp extends Component {
                         StatusSeen: StatusSeen
                     });
                 } else {
-                    //set data
                     const ServerChatData = {
                         UserName: Data.UserName,
                         Content: Data.Content,
@@ -462,6 +466,7 @@ export default class ChatApp extends Component {
             });
 
             socket.on('Server-send-add-friend-to-user', Data => {
+                console.log(Data)
                 let ListChat = this.state.ListChat;
                 let ListChatContent = this.state.ListChatContent;
                 ListChat.push(Data);
@@ -482,6 +487,7 @@ export default class ChatApp extends Component {
                 let ListID = [];
                 ListID.push(Data.ID);
                 socket.emit('Client-join-room', ListID);
+                window.location.reload(false);
             });
             socket.on("Server-send-add-group-to-me", Data => {
                 let ListChat = this.state.ListChat;

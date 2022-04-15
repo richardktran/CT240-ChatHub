@@ -7,7 +7,7 @@ module.exports = (req, res) => {
         UserName: UserName
     }, (error, data) => {
         if (data) {
-            return res.json(data.UserName);
+            return res.json("");
         }
         return res.json("");
     });

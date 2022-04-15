@@ -2,6 +2,7 @@ import { Component } from "react";
 import ChatUser from "./User";
 
 export default class Search extends Component {
+
     render() {
         return (
             <div className="nk-chat-aside-body" data-simplebar="init">

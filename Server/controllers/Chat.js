@@ -7,12 +7,13 @@ const path = require('path');
 const fs = require('fs');
 
 module.exports = (Socket) => {
-    //receive information
+    // receive information
     Socket.on("Client-send-my-information", Data => {
         Socket.join(Data);
         Socket.id = Data;
         Socket.broadcast.emit("Server-send-online", Data);
     });
+
     //join all room
     Socket.on('Client-join-room', Data => {
         Data.forEach(element => {
@@ -43,6 +44,8 @@ module.exports = (Socket) => {
                     }
                 });
             });
+            console.log("GUI tin vao room " + Data.Id)
+            console.log("voi noi dung  " + Data.Content)
             //send to user
             Socket.to(Data.Id).emit('Server-send-data', {
                 Id: Data.Id,
@@ -162,6 +165,7 @@ module.exports = (Socket) => {
                 }
             ]
         }, (error, data) => {
+            console.log(data)
             const ID = "U" + data._id;
             Socket.emit("Server-send-add-friend-to-me", {
                 ID: ID,
@@ -383,10 +387,10 @@ module.exports = (Socket) => {
     });
     Socket.on('disconnect', () => {
         const UserName = Socket.id;
-        StatusOnline.findOneAndRemove({
-            UserName: UserName
-        }, (error) => {
-            Socket.broadcast.emit("Server-send-not-online", UserName);
-        });
+        // StatusOnline.findOneAndRemove({
+        //     UserName: UserName
+        // }, (error) => {
+        //     Socket.broadcast.emit("Server-send-not-online", UserName);
+        // });
     })
 }
