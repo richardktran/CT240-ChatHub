@@ -3,6 +3,7 @@ import React, { Component } from "react";
 export default class Chat extends React.Component {
     constructor(props) {
         super(props);
+
     }
 
     scrollToBottom = () => {
@@ -10,6 +11,7 @@ export default class Chat extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props.Contents)
         this.scrollToBottom();
     }
 
@@ -130,6 +132,14 @@ export default class Chat extends React.Component {
                                                     </ul>
                                                 </div>
                                             </div>)
+                                        } else {
+                                            return (
+                                                <div className="chat-sap">
+                                                    <div className="chat-sap-meta">
+                                                        <span>Chưa có tin nhắn </span>
+                                                    </div>
+                                                </div>
+                                            );
                                         }
                                     })}
                                     <div style={{ float: "left", clear: "both" }}

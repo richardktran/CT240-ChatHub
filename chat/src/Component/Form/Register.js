@@ -9,9 +9,9 @@ export default class Register extends Component {
                 <div className="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
                     <div className="nk-block pt-5 nk-auth-body">
                         <div className="brand-logo pb-5 mt-5">
-                            <a href="html/index.html" className="logo-link">
-                                <img className="logo-light logo-img logo-img-lg" src="./images/logo.png" srcSet="./images/logo2x.png 2x" alt="logo" />
-                                <img className="logo-dark logo-img logo-img-lg" src="./images/logo-dark.png" srcSet="./images/logo-dark2x.png 2x" alt="logo-dark" />
+                            <a href="#" className="logo-link">
+                                <img className="logo-light logo-img logo-img-lg" src="./images/logo.jfif" srcSet="./images/logo2x.png 2x" alt="logo" />
+                                <img className="logo-dark logo-img logo-img-lg" src="./images/logo1.jpg" srcSet="./images/logo-dark2x.png 2x" alt="logo-dark" />
                             </a>
                         </div>
                         <div className="nk-block-head">
