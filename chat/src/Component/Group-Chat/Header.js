@@ -76,7 +76,7 @@ export default class Header extends Component {
                         <div className="dropdown">
                             <a href="#" className="dropdown-toggle dropdown-indicator" data-toggle="dropdown" aria-expanded="false">
                                 <div className="user-avatar">
-                                    <img src={this.props.MyData} alt="" />
+                                    <img src={`http://localhost:4000/${this.props.MyData}`} alt="" />
                                 </div>
                                 <div className="title">Chats</div>
                             </a>

@@ -4,7 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
-mongoose.connect('mongodb://localhost:27017/Chat_Database', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://chathubct240:chathubct240@cluster0.vykh7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 app.set('view engine', 'ejs');
 const expressSession = require('express-session');
 app.use(express.static('public'));

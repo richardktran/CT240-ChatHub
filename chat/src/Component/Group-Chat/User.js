@@ -78,7 +78,7 @@ export default class User extends Component {
             <li key={this.props.ID} className="chat-item" onClick={this.props.AddFriend ? null : this.ClickChatUser}>
                 <a className="chat-link chat-open" href="#">
                     <div className="chat-media user-avatar">
-                        <img src={this.props.PathAvatar} alt="" />
+                        <img src={`http://localhost:4000/${this.props.PathAvatar}`} alt="" />
                         <span className="status dot dot-lg dot-success" />
                     </div>
                     <div className="chat-info">
