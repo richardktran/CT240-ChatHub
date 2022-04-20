@@ -10,11 +10,13 @@ import Input from "./Chat/Input.js";
 import Infomation from "./Infomation/Infomation.js";
 import socket from "./Socket.IO/Socket.js";
 import Introduce from "./Chat/Introduce.js";
+import Option from "./Chat/Option.js";
 
 export default class ChatApp extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            showOption: false,
             //data of this user
             Me: {
                 MyName: String,
@@ -68,6 +70,12 @@ export default class ChatApp extends Component {
             statusOnline: ""
         }
         console.log(this.state.UserChat);
+    }
+
+    toggleOption = () => {
+        this.setState({
+            showOption: !this.state.showOption
+        });
     }
     //click from list user
     ClickChatUser = (UserChatInformation, statusOnline) => {
@@ -300,12 +308,14 @@ export default class ChatApp extends Component {
                 this.ClickChatUser(IdChat);
             });
         }
+
     }
     //click add group
     ClickAddGroup = (DataUserAddGroup) => {
         //add me to ListUserAddGroup
         DataUserAddGroup.ListUser.push(this.state.Me.MyName);
         socket.emit("Client-send-add-group", DataUserAddGroup);
+        window.location.reload(false);
     }
     //Click delete chat and out group
     ClickDeleteChat = (check) => {
@@ -539,6 +549,7 @@ export default class ChatApp extends Component {
                 let ListID = [];
                 ListID.push(Data.ID);
                 socket.emit('Client-join-room', ListID);
+                window.location.reload(false);
             });
             //listent event delete chat
             socket.on("Server-send-delete-chat", IdData => {
@@ -632,10 +643,11 @@ export default class ChatApp extends Component {
                     this.state.UserChat.UserName === "" ?
                         (<Introduce />) :
                         (
-                            <div className="nk-chat-body">
+                            <div className={`nk-chat-body ${this.state.showOption ? "profile-shown" : ""}`}>
                                 <HeaderChat
                                     UserChat={this.state.UserChat}
                                     statusOnline={this.state.statusOnline}
+                                    toggleOption={this.toggleOption}
                                 />
 
                                 <Chat Me={this.state.Me}
@@ -643,6 +655,20 @@ export default class ChatApp extends Component {
                                     UserChat={this.state.UserChat}
                                     Contents={this.state.Contents}
                                 />
+                                {this.state.showOption &&
+                                    <Option
+                                        AddFriend={this.AddFriend}
+                                        DeleteFriend={this.DeleteFriend}
+                                        UserChat={this.state.UserChat}
+                                        ID={this.state.IdData}
+                                        Manage={this.state.ManageItems}
+                                        ClickCreateRoom={this.ClickCreateRoomInGroup}
+                                        ListUser={this.state.user}
+                                        ListChat={this.state.ListChat}
+                                        ClickAddGroup={this.ClickAddGroup}
+                                        ClickDeleteChat={this.ClickDeleteChat}
+                                    />
+                                }
 
                                 <Input
                                     HandleContentChat={this.HandleContentChat}
@@ -651,6 +677,8 @@ export default class ChatApp extends Component {
                             </div>
                         )
                 }
+
+
 
 
 

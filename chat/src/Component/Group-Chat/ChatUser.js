@@ -36,14 +36,18 @@ export default class ChatUser extends Component {
 
     render() {
         return (
-            <div className="row" onClick={this.ClickChatUser}>
-                <div className="col-3">
-                    <img alt="Error" className="avartar-in-list-group" src={this.props.PathAvatar} />
-                </div>
-                <div className="col-9">
-                    <p className={this.state.StatusSeen}>{this.props.UserName}</p>
-                </div>
-            </div>
+            <li className="chat-item" onClick={this.ClickChatUser}>
+                <a className="chat-link chat-open" href="#">
+                    <div className="chat-media user-avatar">
+                        <img src={this.props.PathAvatar} alt="" />
+                    </div>
+                    <div className="chat-info">
+                        <div className="chat-from">
+                            <div className="name {this.state.StatusSeen}">{this.props.UserName}</div>
+                        </div>
+                    </div>
+                </a>
+            </li>
         );
     }
 }

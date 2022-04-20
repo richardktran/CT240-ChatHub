@@ -1,9 +1,133 @@
 import React, { Component } from 'react'
+import axios from 'axios';
+import ListUserChat from '../Infomation/ListUserChat';
+import Manager from '../Infomation/Manager';
 
 export default class Option extends Component {
+    constructor(props) {
+        super(props)
+        this.state = ({
+            ID: "",
+            StatusManager: "",
+            StatusListChatUser: "hide",
+            StatusMedia: "hide",
+            ListUser: [],
+            StatusListUser: true,
+            ShowGroupOption: false,
+        });
+    }
+    //handle manager information
+    ClickItemManagerInformation = (Item) => {
+        const FirstElementID = this.props.ID[0];
+        switch (Item) {
+            case 0:
+                this.setState({
+                    StatusManager: "hide",
+                    StatusListChatUser: "ListChatUser",
+                    StatusListUser: true,
+                    ShowGroupOption: !this.state.ShowGroupOption
+                });
+                break;
+            case 1:
+                if (FirstElementID === 'U') {
+                    if (window.confirm("Do you want delete this chat?")) {
+                        this.props.ClickDeleteChat(1);
+                    }
+                } else {
+                    if (window.confirm("Do you want out this group?")) {
+                        this.props.ClickDeleteChat(0);
+                    }
+                }
+                break;
+            case 2:
+
+                break;
+            case 3:
+                //case click member
+                axios.post('/api/getListUser', {
+                    ID: this.props.ID
+                })
+                    .then(Response => {
+                        this.setState({
+                            ListUser: Response.data.ListUser,
+                            StatusListUser: false
+                        })
+                    })
+                    .catch(error => { });
+                this.setState({
+                    StatusManager: "hide",
+                    StatusListChatUser: "ListChatUser",
+                    ShowGroupOption: !this.state.ShowGroupOption
+                });
+                break;
+            default:
+                break;
+        }
+    }
+    exitGroupOption = () => {
+        this.setState({
+            ShowGroupOption: false,
+            StatusManager: "",
+        });
+    }
+    //click button add group
+    ClickAddGroup = (ListUserAddGroup) => {
+        ListUserAddGroup.push(this.props.UserChat.UserName);
+        let ID;
+        this.props.ListChat.forEach((Element) => {
+            if (Element.UserName === this.props.UserChat.UserName) {
+                ID = Element.ID;
+            }
+        })
+        let DataUserAddGroup = {
+            ID: ID,
+            ListUser: ListUserAddGroup
+        }
+        this.props.ClickAddGroup(DataUserAddGroup);
+        this.exitGroupOption();
+    }
+    //click chat user
+    ClickChatUser = (UserName) => {
+        this.props.ClickCreateRoom(UserName);
+        this.ExitAddGroup();
+    }
+    //click exit add group
+    ExitAddGroup = () => {
+        this.setState({
+            StatusManager: "",
+            StatusListChatUser: "hide"
+        });
+    }
+    //click exit media
+    ExitMedia = () => {
+        this.setState({
+            StatusMedia: "hide",
+            StatusManager: ""
+        })
+    }
+    //when change props
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.UserChat.UserName[0] === "G") {
+            if (nextProps.ID !== prevState.ID) {
+                return {
+                    ID: nextProps.ID,
+                    StatusListUser: true
+                };
+            } else {
+                return null;
+            }
+        }
+        if (nextProps.ID !== prevState.ID) {
+            return {
+                ID: nextProps.ID,
+                StatusListUser: true
+            };
+        }
+        return null;
+    }
     render() {
         return (
-            <div className="nk-chat-profile" data-simplebar="init">
+            <div className="nk-chat-profile visible" data-simplebar="init">
                 <div className="simplebar-wrapper" style={{ margin: '0px' }}>
                     <div className="simplebar-height-auto-observer-wrapper"><div className="simplebar-height-auto-observer" /></div>
                     <div className="simplebar-mask">
@@ -34,26 +158,42 @@ export default class Option extends Component {
                                     </div>
                                     <div className="chat-profile">
                                         <div className="chat-profile-group">
-                                            <a href="#" className="chat-profile-head" data-toggle="collapse" data-target="#chat-options">
-                                                <h6 className="title overline-title">Options</h6>
-                                                <span className="indicator-icon"><em className="icon ni ni-chevron-down" /></span>
-                                            </a>
-                                            <div className="chat-profile-body collapse show" id="chat-options">
-                                                <div className="chat-profile-body-inner">
-                                                    <ul className="chat-profile-options">
-                                                        <li>
-                                                            <a className="chat-option-link" href="#"><em className="icon icon-circle bg-light ni ni-edit-alt" /><span className="lead-text">Nickname</span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="chat-option-link chat-search-toggle" href="#"><em className="icon icon-circle bg-light ni ni-search" /><span className="lead-text">Search In Conversation</span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="chat-option-link" href="#"><em className="icon icon-circle bg-light ni ni-circle-fill" /><span className="lead-text">Change Theme</span></a>
-                                                        </li>
-                                                    </ul>
+                                            {this.state.ShowGroupOption &&
+                                                <ListUserChat
+                                                    ExitGroupOption={this.exitGroupOption}
+                                                    // ExitAddGroup={this.ExitAddGroup}
+                                                    UserChat={this.props.UserChat.UserName}
+                                                    StatusListChatUser={this.state.StatusListChatUser}
+                                                    ListUser={this.props.ListUser}
+                                                    ListUserGroup={this.state.ListUser}
+                                                    StatusListUser={this.state.StatusListUser}
+                                                    ClickCreateRoom={this.ClickChatUser}
+                                                    ListChat={this.props.ListChat}
+                                                    ClickAddGroup={this.ClickAddGroup}
+                                                />
+                                            }
+                                        </div>
+                                        {!this.state.ShowGroupOption &&
+                                            <div className="chat-profile-group">
+                                                <a href="#" className="chat-profile-head" data-toggle="collapse" data-target="#chat-options">
+                                                    <h6 className="title overline-title">Options</h6>
+                                                    <span className="indicator-icon"><em className="icon ni ni-chevron-down" /></span>
+                                                </a>
+                                                <div className="chat-profile-body collapse show" id="chat-options">
+                                                    <div className="chat-profile-body-inner">
+
+
+                                                        <Manager
+                                                            ID={this.props.ID}
+                                                            StatusManager={this.state.StatusManager}
+                                                            ClickItemManagerInformation={this.ClickItemManagerInformation}
+                                                        />
+
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        }
+
                                         {/* .chat-profile-group */}
                                         <div className="chat-profile-group">
                                             <a href="#" className="chat-profile-head" data-toggle="collapse" data-target="#chat-settings">

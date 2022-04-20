@@ -11,7 +11,6 @@ export default class Chat extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.Contents)
         this.scrollToBottom();
     }
 
@@ -60,6 +59,7 @@ export default class Chat extends React.Component {
 
                                         if (Content.Content !== "") {
                                             let is_me = true;
+                                            console.log(Content.Content)
                                             if (this.props.Me.MyName !== Content.UserName && Content.UserName !== "") {
                                                 is_me = false;
                                             }
@@ -70,12 +70,6 @@ export default class Chat extends React.Component {
                                                     PathAvatar = UserInfor.PathAvatar;
                                                 }
                                             });
-
-                                            let no_avt = <div className="chat-avatar">
-                                                <div className="user-avatar bg-purple">
-                                                    <span>IT</span>
-                                                </div>
-                                            </div>
 
                                             let avt = <div className="chat-avatar">
                                                 <div className="chat-media user-avatar">
