@@ -21,8 +21,9 @@ export default class ListUserChat extends Component {
     }
 
     //click user chat
-    ClickExit = () => { 
-        this.props.ExitAddGroup()
+    ClickExit = () => {
+        this.props.ExitGroupOption()
+        // this.props.ExitAddGroup()
         this.setState({
             ListUserAddGroup: []
         })
@@ -84,8 +85,7 @@ export default class ListUserChat extends Component {
                 } catch (e) { }
             });
             const buttonElement = (<button
-                type="button"
-                className="btn btn-success"
+                className="btn btn-primary"
             >Add Group</button>);
             if (ListUserChat_Temp !== prevState.ListUserChat) {
                 return {
@@ -94,7 +94,7 @@ export default class ListUserChat extends Component {
                     title: "Add user"
                 };
             }
-            return {ListUserAddGroup: []};
+            return { ListUserAddGroup: [] };
         } else {
             let ListUserChat_Temp = [];
             nextProps.ListUserGroup.forEach(element => {
@@ -130,23 +130,22 @@ export default class ListUserChat extends Component {
                             <div className="col-2">
                                 <div className="exit-search"
                                     onClick={() => this.ClickExit()}
+                                    style={{ paddingTop: "20px" }}
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="icon-exit" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
                                     </svg>
                                 </div>
                             </div>
-                            <div className="col-5">
-                                <h3>Add user</h3>
+                            <div className="col-4" >
+                                <h5 style={{ paddingTop: "20px" }}>Group</h5>
                             </div>
-                            <div className="col-5">
-                                <span>
-                                    <div onClick={() => this.ClickAddGroup()}>
-                                        {
-                                            this.state.buttonElement
-                                        }
-                                    </div>
-                                </span>
+                            <div className="col-6">
+                                <div onClick={() => this.ClickAddGroup()} >
+                                    {
+                                        this.state.buttonElement
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -166,26 +165,24 @@ export default class ListUserChat extends Component {
                                             checked={this.state.ListUserAddGroup[index]}
                                         />
                                     </div>
-                                    <div className="col-9">
+                                    <ul className="chat-list">
                                         <label for={User.UserName} >
                                             <ChatUser UserName={User.UserName}
                                                 PathAvatar={User.PathAvatar}
                                                 ID=""
-                                                ClickChatUser={() => {}}
+                                                ClickChatUser={() => { }}
                                             />
                                         </label>
-                                    </div>
+                                    </ul>
                                 </div>
                             } else {
-                                return <div className="row">
-                                    <div className="col-9">
-                                        <ChatUser UserName={User.UserName}
-                                            PathAvatar={User.PathAvatar}
-                                            ID=""
-                                            ClickChatUser={this.ClickChatUser}
-                                        />
-                                    </div>
-                                </div>
+                                return <ul className="chat-list">
+                                    <ChatUser UserName={User.UserName}
+                                        PathAvatar={User.PathAvatar}
+                                        ID=""
+                                        ClickChatUser={this.ClickChatUser}
+                                    />
+                                </ul>
                             }
                         })}
                     </div>

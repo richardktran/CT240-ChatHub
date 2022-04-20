@@ -14,7 +14,7 @@ export default class Manager extends Component {
         if (firstElementID === "U") {
             Manager = [
                 "Add Group",
-                "Delete Chat",
+                "Delete Friend",
                 "Media",
             ]
         } else {
@@ -32,29 +32,28 @@ export default class Manager extends Component {
     }
     render() {
         return (
-            <div
-                className={"manager-information-user " + this.props.StatusManager}
-            >
-                <ul>
-                    {
-                        this.state.Manager.map((Element, index) => {
-                            return (
-                                <div
-                                    onClick={() => this.props.ClickItemManagerInformation(index)}
-                                >
-                                    <li>
+
+            <ul className="chat-profile-options">
+                {
+                    this.state.Manager.map((Element, index) => {
+                        return (
+                            <div
+                                onClick={() => this.props.ClickItemManagerInformation(index)}
+                            >
+                                {/* <li>
                                         <p>{this.state.Manager[index]}</p>
-                                    </li>
-                                    <hr />
-                                </div>
-                            )
-                        })
-                    }
-                    <li>
-                        <a href="http://localhost:4000/logout">Logout</a>
-                    </li>
-                </ul>
-            </div>
+                                    </li> */}
+                                <li>
+                                    <a className="chat-option-link" href="#">
+                                        <em className="icon icon-circle bg-light ni ni-edit-alt" />
+                                        <span className="lead-text">{this.state.Manager[index]}</span>
+                                    </a>
+                                </li>
+                            </div>
+                        )
+                    })
+                }
+            </ul>
         );
     }
 }

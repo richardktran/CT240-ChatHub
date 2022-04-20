@@ -89,7 +89,7 @@ export default class Header extends Component {
                             </div>
                         </div>
                     </li>
-                    <li className="mr-n1 mr-md-n2">
+                    <li className="mr-n1 mr-md-n2" onClick={this.props.toggleOption}>
                         <a href="#" className="btn btn-icon btn-trigger text-primary chat-profile-toggle"><em className="icon ni ni-alert-circle-fill" /></a>
                     </li>
                 </ul>
