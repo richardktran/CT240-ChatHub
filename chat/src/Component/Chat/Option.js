@@ -136,11 +136,15 @@ export default class Option extends Component {
                                 <div className="simplebar-content" style={{ padding: '0px' }}>
                                     <div className="user-card user-card-s2 my-4">
                                         <div className="user-avatar md bg-purple">
-                                            <span>IH</span>
+                                            <div className="chat-media md user-avatar">
+                                                <img src={this.props.UserChat.PathAvatar} alt="" />
+                                                <span className="status dot dot-lg dot-success" />
+                                            </div>
                                         </div>
                                         <div className="user-info">
-                                            <h5>Iliash Hossain</h5>
-                                            <span className="sub-text">Active 35m ago</span>
+                                            <h5>{this.props.UserChat.UserName}</h5>
+                                            <div className="sub-text"><span className="d-none d-sm-inline mr-1">Online </span></div>
+                                            {/* {this.state.statusOnline} */}
                                         </div>
                                         <div className="user-card-menu dropdown">
                                             <a href="#" className="btn btn-icon btn-sm btn-trigger dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><em className="icon ni ni-more-h" /></a>
